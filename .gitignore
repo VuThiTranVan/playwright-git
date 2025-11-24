@@ -10,6 +10,7 @@ build/
 
 # Test outputs
 test-results/
+run-results/
 playwright-report/
 blob-report/
 playwright/.cache/

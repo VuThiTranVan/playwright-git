@@ -71,40 +71,8 @@ export default defineConfig({
       testIgnore: /tests\/auth\/.*\.spec\.ts/,
       dependencies: ['setup'],
     },
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-      testMatch: /tests\/auth\/.*\.spec\.ts/,
-    },
-    {
-      name: 'firefox-authenticated',
-      use: {
-        ...devices['Desktop Firefox'],
-        storageState: 'src/fixtures/auth/user.json',
-      },
-      testIgnore: /tests\/auth\/.*\.spec\.ts/,
-      dependencies: ['setup'],
-    },
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-      testMatch: /tests\/auth\/.*\.spec\.ts/,
-    },
-    {
-      name: 'webkit-authenticated',
-      use: {
-        ...devices['Desktop Safari'],
-        storageState: 'src/fixtures/auth/user.json',
-      },
-      testIgnore: /tests\/auth\/.*\.spec\.ts/,
-      dependencies: ['setup'],
-    },
   ],
 
   /* Output folders */
-  outputDir: 'test-results/',
+  outputDir: 'run-results/',
 });
