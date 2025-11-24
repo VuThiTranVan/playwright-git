@@ -1,79 +1,110 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+// Load environment variables
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
+ * Playwright configuration for Sauce Demo application
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './tests',
-  /* Run tests in files in parallel */
-  fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+  /* Maximum time one test can run for */
+  timeout: 30 * 1000,
+
+  /* Test execution settings */
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+
+  /* Reporter configuration */
+  reporter: [
+    ['html', { open: 'never' }],
+    ['list'],
+    ['json', { outputFile: 'test-results/results.json' }],
+  ],
+
+  /* Shared settings for all projects */
+  use: {
+    baseURL: process.env.BASE_URL || 'https://www.saucedemo.com',
+
+    /* Collect trace when retrying failed tests */
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
+
+    /* Browser context settings */
+    viewport: { width: 1280, height: 720 },
+    ignoreHTTPSErrors: true,
+
+    /* Action timeout */
+    actionTimeout: 10 * 1000,
+    navigationTimeout: 30 * 1000,
   },
+
+  /* Global setup/teardown */
+  globalSetup: require.resolve('./src/config/global-setup.ts'),
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
     },
-
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+      testMatch: /tests\/auth\/.*\.spec\.ts/,
+    },
+    {
+      name: 'chromium-authenticated',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'src/fixtures/auth/user.json',
+      },
+      testIgnore: /tests\/auth\/.*\.spec\.ts/,
+      dependencies: ['setup'],
+    },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+      testMatch: /tests\/auth\/.*\.spec\.ts/,
     },
-
+    {
+      name: 'firefox-authenticated',
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: 'src/fixtures/auth/user.json',
+      },
+      testIgnore: /tests\/auth\/.*\.spec\.ts/,
+      dependencies: ['setup'],
+    },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+      },
+      testMatch: /tests\/auth\/.*\.spec\.ts/,
     },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    {
+      name: 'webkit-authenticated',
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: 'src/fixtures/auth/user.json',
+      },
+      testIgnore: /tests\/auth\/.*\.spec\.ts/,
+      dependencies: ['setup'],
+    },
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  /* Output folders */
+  outputDir: 'test-results/',
 });
