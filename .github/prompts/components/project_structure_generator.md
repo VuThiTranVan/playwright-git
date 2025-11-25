@@ -12,55 +12,55 @@ Before generating the project structure, collect detailed configuration:
 **Multi-Site Project Example:**
 
 ```yaml
-project_type: 'multi-site'
-project_name: 'company-playwright-tests'
+project_type: "multi-site"
+project_name: "company-playwright-tests"
 sites:
-  - name: 'site-a'
-    base_url: 'https://site-a-staging.company.com'
-    login_url: 'https://site-a-staging.company.com/login'
+  - name: "site-a"
+    base_url: "https://site-a-staging.company.com"
+    login_url: "https://site-a-staging.company.com/login"
     auth_fields:
-      - name: 'email'
-        env_var: 'SITE_A_EMAIL'
-        example: 'user@example.com'
-      - name: 'password'
-        env_var: 'SITE_A_PASSWORD'
-        example: 'password123'
-  - name: 'site-b'
-    base_url: 'https://site-b-staging.company.com'
-    login_url: 'https://site-b-staging.company.com/signin'
+      - name: "email"
+        env_var: "SITE_A_EMAIL"
+        example: "user@example.com"
+      - name: "password"
+        env_var: "SITE_A_PASSWORD"
+        example: "password123"
+  - name: "site-b"
+    base_url: "https://site-b-staging.company.com"
+    login_url: "https://site-b-staging.company.com/signin"
     auth_fields:
-      - name: 'username'
-        env_var: 'SITE_B_USERNAME'
-        example: 'testuser'
-      - name: 'password'
-        env_var: 'SITE_B_PASSWORD'
-        example: 'testpass123'
+      - name: "username"
+        env_var: "SITE_B_USERNAME"
+        example: "testuser"
+      - name: "password"
+        env_var: "SITE_B_PASSWORD"
+        example: "testpass123"
 ```
 
 **Single-Site Multi-Role Project Example:**
 
 ```yaml
-project_type: 'single-site-multi-role'
-project_name: 'auto-proever-tests'
-base_url: 'https://auto-proever.sun-asterisk.vn'
-login_url: 'https://auto-proever.sun-asterisk.vn/login'
+project_type: "single-site-multi-role"
+project_name: "auto-proever-tests"
+base_url: "https://auto-proever.sun-asterisk.vn"
+login_url: "https://auto-proever.sun-asterisk.vn/login"
 roles:
-  - name: 'admin'
+  - name: "admin"
     auth_fields:
-      - name: 'email'
-        env_var: 'ADMIN_EMAIL'
-        example: 'admin@example.com'
-      - name: 'password'
-        env_var: 'ADMIN_PASSWORD'
-        example: 'admin123'
-  - name: 'user'
+      - name: "email"
+        env_var: "ADMIN_EMAIL"
+        example: "admin@example.com"
+      - name: "password"
+        env_var: "ADMIN_PASSWORD"
+        example: "admin123"
+  - name: "user"
     auth_fields:
-      - name: 'email'
-        env_var: 'USER_EMAIL'
-        example: 'user@example.com'
-      - name: 'password'
-        env_var: 'USER_PASSWORD'
-        example: 'user123'
+      - name: "email"
+        env_var: "USER_EMAIL"
+        example: "user@example.com"
+      - name: "password"
+        env_var: "USER_PASSWORD"
+        example: "user123"
 ```
 
 ### Required User Input Collection

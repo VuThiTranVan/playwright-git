@@ -95,7 +95,7 @@ page.getByRole("button", { name: selectors.login.submitButton.value });
 
 ```typescript
 // BAD: Brittle selectors
-page.locator('.btn-primary.submit-button');
+page.locator(".btn-primary.submit-button");
 page.locator('//div[@class="container"]/button[2]');
 ```
 
@@ -172,8 +172,8 @@ class LoginPage {
 }
 
 // BAD: Direct locator manipulation in tests
-test('should login', async ({ page }) => {
-  await page.locator('[data-test-id="username"]').fill('user'); // ❌ Use POM methods
+test("should login", async ({ page }) => {
+  await page.locator('[data-test-id="username"]').fill("user"); // ❌ Use POM methods
 });
 
 // BAD: Hard waits
@@ -214,9 +214,9 @@ class LoginPage {
 }
 
 // GOOD: Test with assertions
-test('should login successfully', async ({ page }) => {
+test("should login successfully", async ({ page }) => {
   const loginPage = new LoginPage(page);
-  await loginPage.login('user', 'pass');
+  await loginPage.login("user", "pass");
 
   await expect(page.getByTestId(selectors.dashboard.header.loc)).toBeVisible();
 });

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["ESNext", "DOM"],
+    "types": ["node", "@playwright/test"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@utils/*": ["src/utils/*"],
+      "@config/*": ["src/config/*"],
+      "@fixtures/*": ["src/fixtures/*"],
+      "@selectors/*": ["locales/ja/selectors/*"]
+    }
+  },
+  "include": ["src/**/*", "tests/**/*", "locales/**/*", "playwright.config.ts"],
+  "exclude": ["node_modules", "test-results", "playwright-report"]
+}

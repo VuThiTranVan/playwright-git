@@ -39,55 +39,55 @@ yarn create playwright
 **For Multi-Site Projects** (multiple different websites):
 
 ```yaml
-project_type: 'multi-site'
-project_name: 'my-testing-project'
+project_type: "multi-site"
+project_name: "my-testing-project"
 sites:
-  - name: 'main-site'
-    base_url: 'https://main-app.example.com'
-    login_url: 'https://main-app.example.com/login'
+  - name: "main-site"
+    base_url: "https://main-app.example.com"
+    login_url: "https://main-app.example.com/login"
     auth_fields:
-      - name: 'email'
-        env_var: 'MAIN_SITE_EMAIL'
-        example: 'user@example.com'
-      - name: 'password'
-        env_var: 'MAIN_SITE_PASSWORD'
-        example: 'password123'
-  - name: 'admin-portal'
-    base_url: 'https://admin.example.com'
-    login_url: 'https://admin.example.com/signin'
+      - name: "email"
+        env_var: "MAIN_SITE_EMAIL"
+        example: "user@example.com"
+      - name: "password"
+        env_var: "MAIN_SITE_PASSWORD"
+        example: "password123"
+  - name: "admin-portal"
+    base_url: "https://admin.example.com"
+    login_url: "https://admin.example.com/signin"
     auth_fields:
-      - name: 'username'
-        env_var: 'ADMIN_USERNAME'
-        example: 'admin'
-      - name: 'password'
-        env_var: 'ADMIN_PASSWORD'
-        example: 'adminpass'
+      - name: "username"
+        env_var: "ADMIN_USERNAME"
+        example: "admin"
+      - name: "password"
+        env_var: "ADMIN_PASSWORD"
+        example: "adminpass"
 ```
 
 **For Single-Site Multi-Role Projects** (one website with different user roles):
 
 ```yaml
-project_type: 'single-site-multi-role'
-project_name: 'my-app-tests'
-base_url: 'https://myapp.example.com'
-login_url: 'https://myapp.example.com/login'
+project_type: "single-site-multi-role"
+project_name: "my-app-tests"
+base_url: "https://myapp.example.com"
+login_url: "https://myapp.example.com/login"
 roles:
-  - name: 'admin'
+  - name: "admin"
     auth_fields:
-      - name: 'email'
-        env_var: 'ADMIN_EMAIL'
-        example: 'admin@example.com'
-      - name: 'password'
-        env_var: 'ADMIN_PASSWORD'
-        example: 'admin123'
-  - name: 'user'
+      - name: "email"
+        env_var: "ADMIN_EMAIL"
+        example: "admin@example.com"
+      - name: "password"
+        env_var: "ADMIN_PASSWORD"
+        example: "admin123"
+  - name: "user"
     auth_fields:
-      - name: 'email'
-        env_var: 'USER_EMAIL'
-        example: 'user@example.com'
-      - name: 'password'
-        env_var: 'USER_PASSWORD'
-        example: 'user123'
+      - name: "email"
+        env_var: "USER_EMAIL"
+        example: "user@example.com"
+      - name: "password"
+        env_var: "USER_PASSWORD"
+        example: "user123"
 ```
 
 ### **Step 2: Execute Setup Workflow**
