@@ -23,13 +23,13 @@ Generate AuthManager class based on project type:
 
 ```typescript
 // utils/auth.ts - Dynamic generation based on sites configuration
-import { readFileSync, existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
-import { Encoding, SiteType } from '@/enums/common';
+import { readFileSync, existsSync, mkdirSync } from "fs";
+import { join } from "path";
+import { Encoding, SiteType } from "@/enums/common";
 
 export class AuthManager {
   private static instance: AuthManager;
-  private storageStateDir = './auth';
+  private storageStateDir = "./auth";
 
   private constructor() {
     this.ensureAuthDirectoryExists();
@@ -55,9 +55,13 @@ export class AuthManager {
   async getStorageState(site: SiteType) {
     const storageStatePath = this.getStorageStatePath(site);
     if (!existsSync(storageStatePath)) {
-      throw new Error(`Auth state file not found for ${site}. Please run auth setup first.`);
+      throw new Error(
+        `Auth state file not found for ${site}. Please run auth setup first.`,
+      );
     }
-    const storageState = JSON.parse(readFileSync(storageStatePath, Encoding.Utf8));
+    const storageState = JSON.parse(
+      readFileSync(storageStatePath, Encoding.Utf8),
+    );
     return storageState;
   }
 
@@ -69,7 +73,7 @@ export class AuthManager {
   async clearAuthState(site: SiteType): Promise<void> {
     const storageStatePath = this.getStorageStatePath(site);
     if (existsSync(storageStatePath)) {
-      require('fs').unlinkSync(storageStatePath);
+      require("fs").unlinkSync(storageStatePath);
     }
   }
 
@@ -85,14 +89,14 @@ export class AuthManager {
 
 ```typescript
 // utils/auth.ts - Dynamic generation based on roles configuration
-import { expect, Page } from '@playwright/test';
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
-import { Encoding, RoleType } from '@/enums/common';
-import { SigninPage } from '@/pages/signin';
-import { ROUTES } from '@/constants/routes';
-import { authConfig } from '@/tests/configs/auth';
-import { JSON_INDENTATION } from '@/constants/common';
+import { expect, Page } from "@playwright/test";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { join } from "path";
+import { Encoding, RoleType } from "@/enums/common";
+import { SigninPage } from "@/pages/signin";
+import { ROUTES } from "@/constants/routes";
+import { authConfig } from "@/tests/configs/auth";
+import { JSON_INDENTATION } from "@/constants/common";
 
 export class AuthManager {
   private static instance: AuthManager;
@@ -127,19 +131,24 @@ export class AuthManager {
     await page.waitForURL((url) => url.hostname.includes(url));
     await signinPage.enterEmail(credentials.email);
     await signinPage.enterPassword(credentials.password);
-    await signinPage.confirmModeStaySignin(false, 'No');
+    await signinPage.confirmModeStaySignin(false, "No");
 
     await page.waitForURL((url) => url.pathname.includes(url));
     await expect(signinPage.dashboardHeading).toBeVisible();
 
     const storageState = await page.context().storageState();
     const storageStatePath = this.getStorageStatePath(role);
-    writeFileSync(storageStatePath, JSON.stringify(storageState, null, JSON_INDENTATION));
+    writeFileSync(
+      storageStatePath,
+      JSON.stringify(storageState, null, JSON_INDENTATION),
+    );
   }
 
   async getStorageState(role: RoleType) {
     const storageStatePath = this.getStorageStatePath(role);
-    const storageState = JSON.parse(readFileSync(storageStatePath, Encoding.Utf8));
+    const storageState = JSON.parse(
+      readFileSync(storageStatePath, Encoding.Utf8),
+    );
     return storageState;
   }
 
@@ -151,7 +160,7 @@ export class AuthManager {
   async clearAuthState(role: RoleType): Promise<void> {
     const storageStatePath = this.getStorageStatePath(role);
     if (existsSync(storageStatePath)) {
-      require('fs').unlinkSync(storageStatePath);
+      require("fs").unlinkSync(storageStatePath);
     }
   }
 

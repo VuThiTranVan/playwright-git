@@ -41,18 +41,18 @@ export default defineConfig({
 **Single-Site Multi-Role Template:**
 
 ```typescript
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   projects: [
     // Single auth setup project
-    { name: 'auth-setup', testMatch: /auth\.setup\.ts/ },
+    { name: "auth-setup", testMatch: /auth\.setup\.ts/ },
     // Role-based test projects
     {
-      name: '{role}',
-      use: { ...devices['Desktop Chrome'] },
-      testMatch: '**/{role}/**/*.spec.ts',
-      dependencies: ['auth-setup'],
+      name: "{role}",
+      use: { ...devices["Desktop Chrome"] },
+      testMatch: "**/{role}/**/*.spec.ts",
+      dependencies: ["auth-setup"],
     },
   ],
 });
@@ -274,14 +274,14 @@ USER_PASSWORD=YourUserPassword123
 export default defineConfig({
   projects: [
     // Setup projects
-    { name: 'site-a-auth-setup', testMatch: '**/site-a/auth.setup.ts' },
-    { name: 'site-b-auth-setup', testMatch: '**/site-b/auth.setup.ts' },
+    { name: "site-a-auth-setup", testMatch: "**/site-a/auth.setup.ts" },
+    { name: "site-b-auth-setup", testMatch: "**/site-b/auth.setup.ts" },
 
     // Test projects
     {
-      name: 'site-a-tests',
-      testMatch: '**/site-a/**/*.spec.ts',
-      dependencies: ['site-a-auth-setup'],
+      name: "site-a-tests",
+      testMatch: "**/site-a/**/*.spec.ts",
+      dependencies: ["site-a-auth-setup"],
     },
     // ... more projects
   ],
@@ -362,9 +362,9 @@ export default defineConfig({
 ### Authentication Fixtures Pattern
 
 ```typescript
-import { test as baseTest, Page } from '@playwright/test';
-import { SiteType } from '@/enums/common';
-import { AuthManager } from '@/utils/auth';
+import { test as baseTest, Page } from "@playwright/test";
+import { SiteType } from "@/enums/common";
+import { AuthManager } from "@/utils/auth";
 
 export interface AuthFixtures {
   authenticatedPage: Page;
@@ -376,7 +376,7 @@ export interface AuthWorkerFixtures {
 }
 
 export const test = baseTest.extend<AuthFixtures, AuthWorkerFixtures>({
-  site: [SiteType.SiteA, { scope: 'worker' }],
+  site: [SiteType.SiteA, { scope: "worker" }],
 
   authenticatedPage: async ({ browser, site }, use) => {
     const authManager = AuthManager.getInstance();
@@ -397,18 +397,18 @@ export const test = baseTest.extend<AuthFixtures, AuthWorkerFixtures>({
 
 // Dynamic exports for each site
 export const siteATest = test.extend<AuthFixtures, AuthWorkerFixtures>({
-  site: [SiteType.SiteA, { scope: 'worker' }],
+  site: [SiteType.SiteA, { scope: "worker" }],
 });
 
 export const siteBTest = test.extend<AuthFixtures, AuthWorkerFixtures>({
-  site: [SiteType.SiteB, { scope: 'worker' }],
+  site: [SiteType.SiteB, { scope: "worker" }],
 });
 
 export const siteCTest = test.extend<AuthFixtures, AuthWorkerFixtures>({
-  site: [SiteType.SiteC, { scope: 'worker' }],
+  site: [SiteType.SiteC, { scope: "worker" }],
 });
 
-export { expect } from '@playwright/test';
+export { expect } from "@playwright/test";
 ```
 
 ````

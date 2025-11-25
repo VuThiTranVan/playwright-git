@@ -208,10 +208,10 @@ export const selectors = {
 
 ```typescript
 // ✅ CORRECT: Use existing page object methods ONLY
-import { LoginPage } from '@/pages/{site-name}/login';
-import testData from '@/locales/ja/{site-name}/data/login.json';
+import { LoginPage } from "@/pages/{site-name}/login";
+import testData from "@/locales/ja/{site-name}/data/login.json";
 
-test('login validation', async ({ authenticatedPage }) => {
+test("login validation", async ({ authenticatedPage }) => {
   const loginPage = new LoginPage(authenticatedPage);
   await loginPage.fillEmail(testData.validCredentials.email);
   await loginPage.fillPassword(testData.validCredentials.password);
@@ -222,8 +222,8 @@ test('login validation', async ({ authenticatedPage }) => {
 });
 
 // ❌ INCORRECT: Direct locator usage
-test('bad example', async ({ page }) => {
-  await page.locator('#email').fill('test@example.com'); // NEVER DO THIS
+test("bad example", async ({ page }) => {
+  await page.locator("#email").fill("test@example.com"); // NEVER DO THIS
 });
 ```
 
@@ -291,17 +291,17 @@ import { {siteC}Test as test } from "@/fixtures/auth"; // for {site-c}
 
 ```typescript
 // Auto-select correct role fixture
-import { adminTest as test } from '@/fixtures/auth'; // for admin
-import { userTest as test } from '@/fixtures/auth'; // for user
-import { managerTest as test } from '@/fixtures/auth'; // for manager
+import { adminTest as test } from "@/fixtures/auth"; // for admin
+import { userTest as test } from "@/fixtures/auth"; // for user
+import { managerTest as test } from "@/fixtures/auth"; // for manager
 ```
 
 **Monolithic Projects:**
 
 ```typescript
 // Use standard fixtures
-import { test } from '@/fixtures/base';
-import { test } from '@playwright/test';
+import { test } from "@/fixtures/base";
+import { test } from "@playwright/test";
 ```
 
 ## 🎨 **Smart Test Scenarios**
