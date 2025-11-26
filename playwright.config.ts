@@ -36,7 +36,6 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
-
     /* Browser context settings */
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,

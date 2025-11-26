@@ -37,7 +37,7 @@ playwright-git/
 │   │   ├── auth.setup.ts          # Authentication setup
 │   │   └── login.spec.ts          # 1 test case
 │   └── inventory/
-│       └── inventory.spec.ts      # 1 test case
+│       └── inventory.spec.ts      # 6 test cases
 ├── locales/ja/selectors/          # Centralized selectors
 │   ├── login.selectors.ts
 │   └── inventory.selectors.ts
@@ -189,7 +189,7 @@ This project follows the Page Object Model pattern:
 
 ## 📊 Test Coverage
 
-### Current Test Suite (2 test cases)
+### Current Test Suite (7 test cases)
 
 **Authentication Tests** (`tests/auth/login.spec.ts`)
 
@@ -197,13 +197,14 @@ This project follows the Page Object Model pattern:
 
 **Inventory Tests** (`tests/inventory/inventory.spec.ts`)
 
-- ✅ 1 test: Display all products on inventory page
+- ✅ 4 tests: Product display (all products, add to cart, remove from cart, product info)
+- ✅ 2 tests: Product sorting (A-Z, Z-A)
 
-**Total Execution**: 7 tests passed across 3 browsers
+**Total Execution**: 22 tests passed across 3 browsers
 
-- 1× auth setup
-- 3× login test (Chromium, Firefox, WebKit)
-- 3× inventory test (1 test × 3 browsers)
+- 1x auth setup
+- 3x login test (Chromium, Firefox, WebKit)
+- 18x inventory tests (6 tests × 3 browsers)
 
 ### Page Objects (2)
 
